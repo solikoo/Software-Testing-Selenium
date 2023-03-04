@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org.example</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">org.openqa.selenium.By</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.WebDriver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.chrome.ChromeDriver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.edge.EdgeDriver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.firefox.FirefoxDriver</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">org.openqa.selenium.support.ui.Select</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.Set</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.concurrent.TimeUnit</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Main {</span>
+    <span class="s0">public static </span><span class="s1">&lt;Iterator&gt; </span><span class="s0">void </span><span class="s1">main(String[] args) </span><span class="s0">throws </span><span class="s1">InstantiationException</span><span class="s0">, </span><span class="s1">IllegalAccessException {</span>
+
+        <span class="s2">// declaration and instantiation of objects/variables--------------------------------------</span>
+        <span class="s1">System.setProperty(</span><span class="s3">&quot;webdriver.chrome.driver&quot;</span><span class="s0">, </span><span class="s3">&quot;c:</span><span class="s0">\\</span><span class="s3">Chromedriver</span><span class="s0">\\</span><span class="s3">chromedriver.exe&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">// System.setProperty(&quot;webdriver.firefox.driver&quot;, &quot;c:\\Chromedriver\\geckodriver.exe&quot;);</span>
+        <span class="s2">// System.setProperty(&quot;webdriver.edge.driver&quot;, &quot;c:\\Chromedriver\\msedgedriver.exe&quot;);</span>
+        <span class="s1">WebDriver driver = </span><span class="s0">new </span><span class="s1">ChromeDriver()</span><span class="s0">;</span>
+        <span class="s2">// WebDriver driver = new FirefoxDriver();</span>
+        <span class="s2">// WebDriver driver = new EdgeDriver();</span>
+        <span class="s1">driver.manage().window().maximize()</span><span class="s0">;</span>
+
+        <span class="s2">// Login-----------------------------------------------------------------------------------</span>
+        <span class="s1">driver.get(</span><span class="s3">&quot;https://www.saucedemo.com/&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;user-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;standard_user&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;password&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;secret_sauce&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;login-button&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">String loginSuccess = </span><span class="s3">&quot;Login Success :-)&quot;</span><span class="s0">;</span>
+        <span class="s1">System.out.println(loginSuccess)</span><span class="s0">;</span>
+        <span class="s2">// Ordel 1.--------------------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;add-to-cart-sauce-labs-backpack&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;add-to-cart-sauce-labs-bike-light&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;add-to-cart-sauce-labs-onesie&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.className(</span><span class="s3">&quot;shopping_cart_badge&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;checkout&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// Order filling out-----------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;first-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;Jan&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;last-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;Novotny&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;postal-code&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;68355&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;continue&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// Control of goods------------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.linkText(</span><span class="s3">&quot;Sauce Labs Onesie&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.navigate().back()</span><span class="s0">;</span>
+        <span class="s2">// Sending order---------------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;finish&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">String thankYou = driver.findElement(By.className(</span><span class="s3">&quot;complete-header&quot;</span><span class="s1">)).getText()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(thankYou)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;back-to-products&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// ----------------------------------------------------------------------------------------</span>
+        <span class="s2">// -----------------------------------------------------------------------------------------</span>
+        <span class="s2">// New order 2.-----------------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.linkText(</span><span class="s3">&quot;Sauce Labs Backpack&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;add-to-cart-sauce-labs-backpack&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.className(</span><span class="s3">&quot;shopping_cart_badge&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;checkout&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// Error order------------------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;first-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;Peter&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;last-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;postal-code&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;04011&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;continue&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// Clear the text written in the textbox and write correct text-----------------------------</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;first-name&quot;</span><span class="s1">)).clear()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;first-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;Peter&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;last-name&quot;</span><span class="s1">)).clear()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;last-name&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;Petrovič&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;postal-code&quot;</span><span class="s1">)).clear()</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;postal-code&quot;</span><span class="s1">)).sendKeys(</span><span class="s3">&quot;04231&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;continue&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// Finish order------------------------------------------------------------------------------</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;finish&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s1">String thankYou1 = driver.findElement(By.className(</span><span class="s3">&quot;complete-header&quot;</span><span class="s1">)).getText()</span><span class="s0">;</span>
+        <span class="s1">System.out.println(thankYou1)</span><span class="s0">;</span>
+        <span class="s1">driver.findElement(By.id(</span><span class="s3">&quot;back-to-products&quot;</span><span class="s1">)).click()</span><span class="s0">;</span>
+        <span class="s2">// selectDropdown 1--------------------------------------------------------------------------</span>
+        <span class="s1">Select rozbal1 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.className(</span><span class="s3">&quot;product_sort_container&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">rozbal1.selectByVisibleText(</span><span class="s3">&quot;Price (high to low)&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">// selectDropdown 2--------------------------------------------------------------------------</span>
+        <span class="s1">Select rozbal2 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.className(</span><span class="s3">&quot;product_sort_container&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">rozbal2.selectByVisibleText(</span><span class="s3">&quot;Price (low to high)&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">// selectDropdown 3--------------------------------------------------------------------------</span>
+        <span class="s1">Select rozbal3 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.className(</span><span class="s3">&quot;product_sort_container&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">rozbal3.selectByVisibleText(</span><span class="s3">&quot;Name (Z to A)&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">// selectDropdown 4--------------------------------------------------------------------------</span>
+        <span class="s1">Select rozbal4 = </span><span class="s0">new </span><span class="s1">Select(driver.findElement(By.className(</span><span class="s3">&quot;product_sort_container&quot;</span><span class="s1">)))</span><span class="s0">;</span>
+        <span class="s1">rozbal4.selectByVisibleText(</span><span class="s3">&quot;Name (A to Z)&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s2">// Close-------------------------------------------------------------------------------------</span>
+        <span class="s1">driver.close()</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
